@@ -1,0 +1,21 @@
+### Setup Enviroment
+```
+sudo dnf install mock
+sudo usermod -a -G mock intart
+rpmdev-setuptree
+```
+
+### Build i3-gaps
+
+spectool -g -R ~/rpmbuild/SPECS/i3-gaps.spec
+rpmbuild -bs ~/rpmbuild/SPECS/i3-gaps.spec
+mock -r fedora-29-x86_64 --clean
+mock -r fedora-29-x86_64 --init 
+mock -r fedora-29-x86_64 ~/rpmbuild/SRPMS/i3-gaps-4.16.1-1.fc29.src.rpm --resultdir ~/rpmbuild/RPMS
+
+### Build polybar
+spectool -g -R ~/rpmbuild/SPECS/polybar.spec
+rpmbuild -bs ~/rpmbuild/SPECS/polybar.spec
+mock -r fedora-29-x86_64 --clean
+mock -r fedora-29-x86_64 --init 
+mock -r fedora-29-x86_64 ~/rpmbuild/SRPMS/polybar-3.3.1-1.src.rpm --resultdir ~/rpmbuild/RPMS
